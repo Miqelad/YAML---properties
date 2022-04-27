@@ -1,0 +1,11 @@
+spring:
+  mvc:
+  #применение скрытого поля
+    hiddenmethod:
+      filter:
+        enabled: true
+  freemarker:
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    expose-request-attributes: true 
+#csrf token отвечает
