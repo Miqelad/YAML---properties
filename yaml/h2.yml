@@ -1,6 +1,6 @@
 ###
 #   Database Settings###
-##   H2 Settings, web interface, no local
+##   H2 Settings, web interface, local
 ####
 ###
 spring:
