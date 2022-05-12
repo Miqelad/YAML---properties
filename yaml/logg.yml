@@ -1,0 +1,6 @@
+##создаст файл app.log по указанному пути
+logging:
+  file:
+   name: \\сетевой ресурс/log/app.log
+#   Цветным будет подчеркивать
+spring.output.ansi.enabled: ALWAYS
