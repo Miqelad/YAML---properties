@@ -1,0 +1,8 @@
+<!--Указываем папку сторонних ресурсы  -->
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Djava.library.path=""</argLine>
+                </configuration>
+            </plugin>
