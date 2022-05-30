@@ -6,3 +6,7 @@ logging:
 spring.output.ansi.enabled: ALWAYS
 #формат вывода логов
 logging.pattern.console: '%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n'
+# Избежание пульсаций в cloud
+logging:
+  level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
