@@ -1,10 +1,10 @@
 #    ЛОГИРОВАНИЕ #######################################################
 # Уровень журнала
 # Формат печати файла журнала
-#logging.pattern.file: '%d{HH:mm:ss} %C{1.} [%-5level]  - %msg%n'
+logging.pattern.file: '%d{HH:mm:ss} %C{1.} [%-5level]  - %msg%n'
 
 #Указать путь размещения, файл дефолтное имя будет иметь
-#logging.file.path: "C:/Users/Pmikeladze/CHSMOD/Scheduler/logs"
+logging.file.path: "C:/Users/Pmikeladze/CHSMOD/Scheduler/logs"
 
 #Указание имени файла
 logging.file.name: 'C:/Users/Pmikeladze/CHSMOD/Scheduler/logs/chsmod001.log'
@@ -12,14 +12,14 @@ logging.file.name: 'C:/Users/Pmikeladze/CHSMOD/Scheduler/logs/chsmod001.log'
 #Здесь первое свойство указывает исходное имя файла журнала, а второе указывает шаблон для файлов, которые будут развернуты в следующие дни (ежедневная прокрутка).
 # В шаблоне я добавляю формат даты %d{yyyy-MM-dd} и порядковый номер файла журнала (%i) к имени файла ( MyApp- ).
 #Затем Logback будет хранить журналы за каждый день в каждом файле следующим образом:
-#logging.pattern.rolling-file-name=MyApp-%d{yyyy-MM-dd}.%i.log
+logging.pattern.rolling-file-name=MyApp-%d{yyyy-MM-dd}.%i.log
 
 
 #Максимальное количество файлов журнала:
-#logging.file.max-history: 30
+logging.file.max-history: 30
 
 #Очистить историю при запуске:
-#logging.file.clean-history-on-start: true
+logging.file.clean-history-on-start: true
 
 #Это поддерживает максимальный размер каждого файла журнала около 1 МБ.
 logging.file.max-size: 1MB
