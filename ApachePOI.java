@@ -23,7 +23,7 @@
 */
 
 
-
+_______________________________________________________________________________________________________________________________
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -98,6 +98,7 @@ public class CreateExcel {
 
 
     }
+    _______________________________________________________________________________________________________________________________
 //   Изменение высоты строки
   
       public void serRowHeight() throws IOException {
@@ -111,6 +112,7 @@ public class CreateExcel {
 
 
     }
+    _______________________________________________________________________________________________________________________________
   // Объединение ячеек
 
   
@@ -129,7 +131,7 @@ public class CreateExcel {
 
     }
   
-  
+  _______________________________________________________________________________________________________________________________
   //Внизу будет показано два способа как прочитать данные
   
       public void readExcel(){
@@ -183,3 +185,40 @@ public class CreateExcel {
     }
 
 }
+_______________________________________________________________________________________________________________________________
+// Проверка на цвета
+    @Override
+    public void run(String... args) throws Exception {
+        //файл-книга
+        Workbook excelBook= new XSSFWorkbook(new FileInputStream("R:\\colorer.xlsx"));
+        //итератор страниц
+        Iterator<Sheet> sheetIterator = excelBook.iterator();
+        while (sheetIterator.hasNext()){
+            //Страница
+            Sheet sheet = sheetIterator.next();
+            //Итератор строк
+            Iterator<Row> rowIterator=sheet.iterator();
+            while (rowIterator.hasNext()){
+                //строка
+                Row row = rowIterator.next();
+                //Итератор ячеек
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()){
+                    //Ячейка
+                    Cell cell = cellIterator.next();
+/*                    цвет обязательно врапим до xssf
+                    https://javadoc.io/static/org.apache.poi/poi-ooxml/3.16/org/apache/poi/xssf/usermodel/XSSFColor.html
+                    тут смотрим цвета, модель hex
+                    Example:FFFFFF00 -> убираем 2-е Первые F и вставляем для проверки на сайте https://colorscheme.ru/color-converter.html  */
+                    XSSFColor color = (XSSFColor) cell.getCellStyle().getFillForegroundColorColor();
+                    System.out.println((color ==null)?"null": color.getARGBHex() +"  Long" + " " + cell.getNumericCellValue());
+                }
+
+            }
+        }
+        excelBook.close();
+
+
+
+
+    }
