@@ -8,6 +8,11 @@
 #используйте jdbc:h2:mem:test;DB_CLOSE_DELAY=-1. 
    # url: jdbc:h2://mem:db;DB_CLOSE_DELAY=-1;
 ####
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency> 
 ###
 spring:
 
