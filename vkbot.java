@@ -1,4 +1,10 @@
 /**
+
+        <dependency>
+            <groupId>com.vk.api</groupId>
+            <artifactId>sdk</artifactId>
+            <version>1.0.7</version>
+        </dependency>
  * @author miq 13.07.2022
  */
 import com.vk.api.sdk.client.TransportClient;
@@ -115,4 +121,79 @@ public class VkApiConfig {
         return clientBuilder.build();
     }
 }
+/*Метод для отправки сообщений*/
 
+
+
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.vk.api.sdk.client.TransportClient;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.GroupActor;
+import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.objects.messages.*;
+import com.vk.api.sdk.queries.messages.MessagesGetLongPollHistoryQuery;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import static org.asynchttpclient.util.ProxyUtils.PROXY_HOST;
+
+/**
+ * @author miq 13.07.2022
+ */
+@Component
+@Slf4j
+public class MyBot {
+    @Autowired
+    private VkApiClient vk;
+    @Autowired
+    private UserActor actor;
+
+    public void run() throws ClientException, ApiException, InterruptedException {
+
+
+        Integer ts = vk.messages().getLongPollServer(actor).execute().getTs();
+        Random random = new Random();
+        while (true){
+            MessagesGetLongPollHistoryQuery historyQuery =  vk.messages().getLongPollHistory(actor).ts(ts);
+            List<Message> messages = historyQuery.execute().getMessages().getItems();
+            if (!messages.isEmpty()){
+                messages.forEach(message -> {
+                    System.out.println(message.toString());
+                    try {
+                        if (message.getText().equals("Привет")){
+                            vk.messages().send(actor).message("Привет!").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                        }
+                        else if (message.getText().equals("Кто я?")) {
+                            vk.messages().send(actor).message("Ты хороший человек.").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                        }
+                        else {
+                            vk.messages().send(actor).message("Я тебя не понял.").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                        }
+                    }
+                    catch (ApiException | ClientException e) {e.printStackTrace();}
+                });
+            }
+            ts = vk.messages().getLongPollServer(actor).execute().getTs();
+            Thread.sleep(500);
+        }
+
+
+
+    }
+}
+/*Для настройки proxy, vkdump.properties*/
+proxy.host= 
+proxy.port= 
+vk.api.id= 
+vk.api.token= 
