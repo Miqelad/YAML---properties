@@ -8,6 +8,7 @@
 #используйте jdbc:h2:mem:test;DB_CLOSE_DELAY=-1. 
    # url: jdbc:h2://mem:db;DB_CLOSE_DELAY=-1;
 #### Возможно необходимо выбрать embedded в консоли, уже после get запроса
+# При проблемах подключения в Database pluginf from IDEA, необходимо параметр OLD_INFORMATION_SCHEMA=TRUE this <a="https://github.com/JetBrains/jetbrains_guide/issues/215">info</a>
 <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
